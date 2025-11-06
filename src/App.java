@@ -1,15 +1,15 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class App {
     public static void main(String[] args) {
-
+        System.out.println("Welcome to Scrabble.");
         ArrayList<Tile> tileList = new ArrayList<Tile>();
-
-        
-
-   
-        
-
+        tileGen(tileList);
+        Random random = new Random();
+        int ran = random.nextInt(0, 25);
+        System.out.println(ran);
+        System.out.println(tileList.get(ran).toString());
     }
 
     public static void tileGen(ArrayList<Tile> tileList)
