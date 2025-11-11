@@ -33,7 +33,18 @@ public class App {
             {
                 System.out.println("No, you cannot spell " + yourWord + ".");
             }
-            cont = false;
+
+            System.out.print("Would you like to play again? (Y/N): ");
+            String answer = in.nextLine();
+            if (answer.toUpperCase().equals("Y"))
+            {
+                cont = true;
+            }
+            else
+            {
+                cont = false;
+                System.out.println("Good bye!");
+            }
             
         } while (cont);
         
@@ -52,6 +63,7 @@ public class App {
                 if(it.next().getLetter() == word.toUpperCase().charAt(i))
                 {
                     valid = true;
+                    it.remove();
                     break;
                 }
                 else
@@ -66,7 +78,20 @@ public class App {
 
     public static int score(ArrayList<Tile> base,String word)
     {
-        return 0;
+        Iterator<Tile> it;
+        int score = 0;
+
+        for (int i = 0; i < word.length(); i++) {
+            it = base.iterator();
+            while (it.hasNext()) {
+                if(it.next().getLetter() == word.toUpperCase().charAt(i))
+                {
+                    score += it.next().getValue();
+                }
+                
+            }
+        }
+        return score;
     }
 
     public static void deck(ArrayList<Tile> base, ArrayList<Tile> hand)
