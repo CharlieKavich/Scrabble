@@ -59,7 +59,7 @@ public class App {
         Iterator<Tile> it;
         boolean valid = true;
         ArrayList<Tile> handMemory = new ArrayList<Tile>();
-        
+
         
         for (int i = 0; i < word.length(); i++) {
             it = hand.iterator();
