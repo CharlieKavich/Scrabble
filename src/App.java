@@ -3,10 +3,18 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
-
-
+/**
+ * Application for scrabble.
+ * Creates allows the user to play a gamee of scrabble where the construct words based on a generated deck.
+ * The validity of their word is checked and scored if valid.
+ * @author Charlie Kavich
+ * @author Sebastian Rochin
+ * @since 11-13-25
+ */
 public class App {
-
+    /**
+     * Integer that measures the amount of cards that need to be replaced after each hand of the game.
+     */
     private static int deckChange = 0;
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -53,12 +61,23 @@ public class App {
         } while (cont);
         
     }
-
+    /**
+     * 
+     * @param hand An array list that 
+     * @param word
+     * @return
+     */
     public static boolean check(ArrayList<Tile> hand, String word)
     {
         Iterator<Tile> it;
         boolean valid = true;
         ArrayList<Tile> handMemory = new ArrayList<Tile>();
+
+        for (int i = 0; i < hand.size(); i++) {
+            handMemory.add(hand.get(i));
+        }
+
+
 
         
         for (int i = 0; i < word.length(); i++) {
@@ -79,6 +98,15 @@ public class App {
             }
         }
 
+        if(!valid)
+        {
+            hand.removeAll(hand);
+            hand.addAll(handMemory);
+            deckChange = 0;
+        }
+
+
+        
         
         return valid;
 
