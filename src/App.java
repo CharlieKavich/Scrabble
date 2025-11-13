@@ -3,25 +3,29 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Scanner;
 
+
+
 public class App {
+
+    private static int deckChange = 0;
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Iterator<Tile> it;
         System.out.println("Welcome to Scrabble.");
         ArrayList<Tile> tileList = new ArrayList<Tile>();
         tileGen(tileList);
-
+        ArrayList<Tile> hand = new ArrayList<Tile>();
+        deck(tileList, hand, 7);
         boolean cont = true;
         do {
-            ArrayList<Tile> hand = new ArrayList<Tile>();
-            deck(tileList, hand);
+            deck(tileList, hand, deckChange);
+            deckChange = 0;
 
             System.out.print("Your tile hand: ");
             it = hand.iterator();
             while (it.hasNext()) {
                 System.out.print(it.next().getLetter());
             }
-
 
             System.out.print("\nEnter a word: ");
             String yourWord = in.nextLine();
@@ -53,15 +57,17 @@ public class App {
     public static boolean check(ArrayList<Tile> hand, String word)
     {
         Iterator<Tile> it;
-        
         boolean valid = true;
-
-
+        ArrayList<Tile> handMemory = new ArrayList<Tile>();
+        
+        
         for (int i = 0; i < word.length(); i++) {
             it = hand.iterator();
+            
             while (it.hasNext()) {
                 if(it.next().getLetter() == word.toUpperCase().charAt(i))
                 {
+                    deckChange += 1;
                     valid = true;
                     it.remove();
                     break;
@@ -73,7 +79,9 @@ public class App {
             }
         }
 
+        
         return valid;
+
     }
 
     public static int score(ArrayList<Tile> base,String word)
@@ -94,10 +102,10 @@ public class App {
         return score;
     }
 
-    public static void deck(ArrayList<Tile> base, ArrayList<Tile> hand)
+    public static void deck(ArrayList<Tile> base, ArrayList<Tile> hand, int handSize)
     {
         Random random = new Random(); 
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < handSize; i++) {
             int ran = random.nextInt(0, 25);
             hand.add(base.get(ran));
         }
