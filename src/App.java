@@ -62,10 +62,10 @@ public class App {
         
     }
     /**
-     * 
-     * @param hand An array list that 
-     * @param word
-     * @return
+     * This method checks if the users word is valid and keeps track of how many cards need to be replaced in the hand afterwards.
+     * @param hand An array list that has the users hand of tiles
+     * @param word A string that represents the users inputted word
+     * @return A boolean that represents if their word was possible with the tiles in the hand arraylist.
      */
     public static boolean check(ArrayList<Tile> hand, String word)
     {
@@ -112,6 +112,12 @@ public class App {
 
     }
 
+    /**
+     * This method gives a score based on the users inputted word.
+     * @param base the arrayList with all of the tiles in the alphabet
+     * @param word the users inputted word to be scored.
+     * @return an integer that represents the sum of the values of each tile in the users word.
+     */
     public static int score(ArrayList<Tile> base,String word)
     {
         Iterator<Tile> it;
@@ -130,6 +136,14 @@ public class App {
         return score;
     }
 
+
+    /**
+     * This method fills the users hand of tiles based on the amount that are needed. For example, if the user used 5 tiles in their last hand
+     * the method would only refill 5 tiles into the hand.
+     * @param base the arrayList with all of the tiles in the alphabet
+     * @param hand the arraylist with the users current hand
+     * @param handSize an integer that measures how many cards in the hand need to be replaced
+     */
     public static void deck(ArrayList<Tile> base, ArrayList<Tile> hand, int handSize)
     {
         Random random = new Random(); 
@@ -138,7 +152,10 @@ public class App {
             hand.add(base.get(ran));
         }
     }
-
+    /**
+     * Generates all of the tiles
+     * @param tileList the arrayList that all of the tiles will be added to.
+     */
     public static void tileGen(ArrayList<Tile> tileList)
     {
         tileList.add(new Tile('A', 1));
